@@ -5,8 +5,10 @@ const isDev = process.env.npm_lifecycle_event === "app:dev" ? true : false
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 360,
+    height: 530,
+    useContentSize: true,
+    resizable: false,
     webPreferences: {
       preload: join(__dirname, './preload.js'),
     },
