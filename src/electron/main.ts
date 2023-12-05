@@ -4,17 +4,23 @@ import {app, BrowserWindow} from 'electron'
 const isDev = process.env.npm_lifecycle_event === "app:dev" ? true : false
 
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  const windowOpts = {
     width: 360,
-    height: 530,
+    height: 540,
     useContentSize: true,
     resizable: false,
     webPreferences: {
       preload: join(__dirname, './preload.js'),
     },
-  })
+  }
 
-  if (isDev) {
+  if(isDev) {
+    windowOpts.resizable = true
+  }
+
+  const mainWindow = new BrowserWindow(windowOpts)
+
+  if(isDev) {
     mainWindow.loadURL('http://localhost:3000')
     mainWindow.webContents.openDevTools()
   } else {
